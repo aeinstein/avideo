@@ -22945,12 +22945,42 @@ window["webrtmp"] = new WebRTMP();
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
 /*!***********************************!*\
-  !*** ./src/avideo.js + 1 modules ***!
+  !*** ./src/avideo.js + 2 modules ***!
   \***********************************/
 
 // UNUSED EXPORTS: AVideo
@@ -23167,9 +23197,30 @@ class Log {
 
 // EXTERNAL MODULE: ./lib/hls.light.js
 var hls_light = __webpack_require__("./lib/hls.light.js");
+var hls_light_default = /*#__PURE__*/__webpack_require__.n(hls_light);
 // EXTERNAL MODULE: ./lib/webrtmp.js
 var webrtmp = __webpack_require__("./lib/webrtmp.js");
+;// CONCATENATED MODULE: ./src/utils/utils.js
+function getFileExtension(filename){
+    return filename.split('.').pop();
+}
+
+function _parseRTMPURL(url){
+    let res = url.match(/rtmp:\/\/([^\/:]*)([:0-9]*)\/([^\/]*)\/(.*)/gi);
+
+    if(res && res.length > 0) {     // rtmp
+        return {
+            "server": res[1],
+            "port": res[2]?res[2]:9001,
+            "app": res[3],
+            "stream": res[4],
+        }
+    }
+    return false;
+}
+
 ;// CONCATENATED MODULE: ./src/avideo.js
+
 
 
 
@@ -23181,16 +23232,61 @@ class AVideo extends HTMLVideoElement{
 
     streamurl = "";
 
+    hls_config = {
+        nudgeOffset: 1,
+        //autoStartLoad: true,s
+        maxBufferLength: 10,
+        //backBufferLength: 4,
+        //maxBufferSize: 10 * 1000 * 1000,
+        //startFragPrefetch: false,
+        //maxFragLookUpTolerance: 0.5,
+        initialLiveManifestSize: 3,
+        liveSyncDurationCount: 3		// 2 fragments before playing
+    }
+
     constructor() {
         super();
 
         logger.d(this.TAG, "construct");
+
+        this.webrtmp = window.webrtmp;
     }
 
     play(){
         logger.d(this.TAG, "play");
-        this.setAttribute("src", this.streamurl);
-        return super.play();
+
+        const parts = _parseRTMPURL(this.streamurl);
+
+        if(parts){
+            logger.d(this.TAG, "WebRTMP play");
+            this.webrtmp.open(parts["server"], parts["port"]).then(()=>{
+                this.webrtmp.connect(parts["app"]).then(()=>{
+                    return this.webrtmp.play(parts["stream"]);
+                });
+            });
+
+        } else if(getFileExtension(this.streamurl) === "m3u8"){
+            logger.d(this.TAG, "super.play");
+
+            return new Promise((resolve)=>{
+                logger.d(this.TAG, "starting HLS");
+
+                this.hls = new (hls_light_default())(this.hls_config);
+
+                this.hls.on((hls_light_default()).Events.MEDIA_ATTACHED, () => {
+                    console.log("MEDIA_ATTACHED");
+                    this.hls.loadSource(this.streamurl);
+                });
+
+                this.hls.on((hls_light_default()).Events.MANIFEST_PARSED, (event, data) => {
+                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
+                    super.play().then(resolve);
+                });
+            });
+
+        } else {
+            return super.play();
+        }
     }
 
     connectedCallback(){
@@ -23199,28 +23295,34 @@ class AVideo extends HTMLVideoElement{
     }
 
     disconnectedCallback() {
-        console.log('Custom square element removed from page.');
+        logger.d(this.TAG, 'disconnectedCallback');
     }
 
     adoptedCallback() {
-        console.log('Custom square element moved to new page.');
+        logger.d(this.TAG, 'adoptedCallback');
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         console.log("attributeChangedCallback: " + name);
-        switch(name){
-            case "src":
-                // src parsen
-                const url = new URL(newValue);
+        switch(name) {
+        case "src":
+            this.streamurl = newValue;
 
-                logger.d(this.TAG, url);
+            const parts = _parseRTMPURL(this.streamurl);
 
+            if(parts){
+                logger.i(this.TAG, "loading RTMP");
+                this.webrtmp.attachMediaElement(this);
 
-                break;
+            } else if(getFileExtension(this.streamurl) === "m3u8"){
+                logger.i(this.TAG, "preparing HLS");
 
-            default:
-                logger.d(this.TAG, "Attribute: " + name);
-                break;
+            } else {
+
+                //this.src = this.streamurl;
+            }
+
+            break;
         }
     }
 
@@ -23232,14 +23334,11 @@ class AVideo extends HTMLVideoElement{
     set src(val) {
         logger.d("setSrc: " + val);
         this.streamurl = val;
+        this.setAttribute("src", val);
     }
-
-
 }
 
-
-customElements.define("a-video", AVideo, { extends: "video" });
-
+customElements.define("very-cool", AVideo, { extends: "video" });
 
 })();
 

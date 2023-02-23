@@ -1,7 +1,7 @@
 import Log from "./utils/logger";
 import Hls from "../lib/hls.light";
 import WebRTMP from "../lib/webrtmp";
-import {getFileExtension} from "./utils/utils";
+import {_parseRTMPURL, getFileExtension} from "./utils/utils";
 
 
 export class AVideo extends HTMLVideoElement{
@@ -10,50 +10,61 @@ export class AVideo extends HTMLVideoElement{
 
     streamurl = "";
 
+    hls_config = {
+        nudgeOffset: 1,
+        //autoStartLoad: true,s
+        maxBufferLength: 10,
+        //backBufferLength: 4,
+        //maxBufferSize: 10 * 1000 * 1000,
+        //startFragPrefetch: false,
+        //maxFragLookUpTolerance: 0.5,
+        initialLiveManifestSize: 3,
+        liveSyncDurationCount: 3		// 2 fragments before playing
+    }
+
     constructor() {
         super();
 
         Log.d(this.TAG, "construct");
 
-        this.webrtmp = new WebRTMP();
+        this.webrtmp = window.webrtmp;
     }
 
     play(){
         Log.d(this.TAG, "play");
 
-        const url = new URL(this.streamurl);
+        const parts = _parseRTMPURL(this.streamurl);
 
-        Log.d(this.TAG, url);
-
-        switch(url.protocol){
-        case "https:":
-        case "http:":
-            switch(getFileExtension(url.pathname)){
-            case "m3u8":
-                Log.i(this.TAG, "loading HLS");
-                break;
-
-            default:
-                return super.play();
-            }
-
-            break;
-
-        case "rtmp:":
-            Log.i(this.TAG, "loading RTMP");
-            this.webrtmp.attachMedia(this);
-            let port = url.port;
-            if(!port) port = 9001;
-
-            this.webrtmp.open(url.hostname, port).then(()=>{
-                this.webrtmp.connect().then(()=>{
-                    return this.webrtmp.play();
+        if(parts){
+            Log.d(this.TAG, "WebRTMP play");
+            this.webrtmp.open(parts["server"], parts["port"]).then(()=>{
+                this.webrtmp.connect(parts["app"]).then(()=>{
+                    return this.webrtmp.play(parts["stream"]);
                 });
             });
-            break;
-        }
 
-        //this.setAttribute("src", this.streamurl);
+        } else if(getFileExtension(this.streamurl) === "m3u8"){
+            Log.d(this.TAG, "super.play");
+
+            return new Promise((resolve)=>{
+                Log.d(this.TAG, "starting HLS");
+
+                this.hls = new Hls(this.hls_config);
+
+                this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+                    console.log("MEDIA_ATTACHED");
+                    this.hls.loadSource(this.streamurl);
+                });
+
+                this.hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
+                    super.play().then(resolve);
+                });
+            });
+
+        } else {
+            return super.play();
+        }
     }
 
     connectedCallback(){
@@ -71,34 +82,25 @@ export class AVideo extends HTMLVideoElement{
 
     attributeChangedCallback(name, oldValue, newValue) {
         console.log("attributeChangedCallback: " + name);
-        switch(name){
-            case "src":
-                // src parsen
-                const url = new URL(newValue);
+        switch(name) {
+        case "src":
+            this.streamurl = newValue;
 
-                Log.d(this.TAG, url);
+            const parts = _parseRTMPURL(this.streamurl);
 
-                switch(url.protocol){
-                    case "https:":
-                    case "http:":
-                        switch(getFileExtension(url.pathname)){
-                            case "m3u8":
-                                Log.i(this.TAG, "loading HLS");
-                                break;
-                        }
+            if(parts){
+                Log.i(this.TAG, "loading RTMP");
+                this.webrtmp.attachMediaElement(this);
 
-                        break;
+            } else if(getFileExtension(this.streamurl) === "m3u8"){
+                Log.i(this.TAG, "preparing HLS");
 
-                    case "rtmp:":
-                        Log.i(this.TAG, "loading RTMP");
-                        break;
-                }
+            } else {
 
-                break;
+                //this.src = this.streamurl;
+            }
 
-            default:
-                Log.d(this.TAG, "Attribute: " + name);
-                break;
+            break;
         }
     }
 
@@ -110,9 +112,8 @@ export class AVideo extends HTMLVideoElement{
     set src(val) {
         Log.d("setSrc: " + val);
         this.streamurl = val;
+        this.setAttribute("src", val);
     }
 }
 
-
-customElements.define("a-video", AVideo, { extends: "video" });
-
+customElements.define("very-cool", AVideo, { extends: "video" });
