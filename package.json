@@ -1,0 +1,18 @@
+{
+	"name": "magicvideo",
+	"version": "1.0.0",
+	"description": "",
+	"private": true,
+	"author": "Michael Balen",
+	"license": "Apache-2.0",
+	"main": "./dist/avideo.js",
+	"scripts": {
+		"build-develop": "node_modules/.bin/webpack --mode=development",
+		"build-production": "node_modules/.bin/webpack --mode=production"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"webpack": "^5.58.2",
+		"webpack-cli": "*"
+	}
+}
