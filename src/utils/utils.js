@@ -1,9 +1,14 @@
 export function getFileExtension(filename){
+    if(!filename) return false;
     return filename.split('.').pop();
 }
 
 export function _parseRTMPURL(url){
-    let res = url.match(/rtmp:\/\/([^\/:]*)([:0-9]*)\/([^\/]*)\/(.*)/gi);
+    console.log("_parseRTMP: " + url);
+    if(!url) return false;
+    let res = url.match(/rtmp:\/\/([^\/:]*):{0,1}([0-9]*)\/([^\/]*)\/(.*)/i);
+
+    console.log(res);
 
     if(res && res.length > 0) {     // rtmp
         return {

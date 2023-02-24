@@ -5,7 +5,7 @@
       <webServer id="4a4af3d3-6161-4954-bb08-47ea52b8f15b" name="BunkerTV" url="https://bunkertv.org/avideo">
         <fileTransfer rootFolder="/home/bunkertv/htdocs/avideo" accessType="SFTP" host="bunkertv.org" port="22" sshConfigId="55b2d163-3f59-4b8a-9b29-24360fa56541" sshConfig="root@bunkertv.org:22 key" keyPair="true">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>

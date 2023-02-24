@@ -20974,41 +20974,96 @@ var XhrLoader = /*#__PURE__*/function () {
 /*!************************!*\
   !*** ./lib/webrtmp.js ***!
   \************************/
-/***/ (() => {
+/***/ ((module) => {
 
-/******/ (() => { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else {}
+})(self, () => {
+return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({});
 /************************************************************************/
 /******/ 	// The require scope
-/******/ 	var __nested_webpack_require_224__ = {};
+/******/ 	var __nested_webpack_require_586__ = {};
 /******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__nested_webpack_require_224__.m = __webpack_modules__;
+/******/ 	__nested_webpack_require_586__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nested_webpack_require_586__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nested_webpack_require_586__.o(definition, key) && !__nested_webpack_require_586__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/get javascript chunk filename */
 /******/ 	(() => {
 /******/ 		// This function allow to reference async chunks
-/******/ 		__nested_webpack_require_224__.u = (chunkId) => {
+/******/ 		__nested_webpack_require_586__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
 /******/ 			return "dist/" + "webrtmp.worker" + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__nested_webpack_require_586__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_224__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_586__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nested_webpack_require_586__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_224__.p = "/webrtmp/";
+/******/ 		var scriptUrl;
+/******/ 		if (__nested_webpack_require_586__.g.importScripts) scriptUrl = __nested_webpack_require_586__.g.location + "";
+/******/ 		var document = __nested_webpack_require_586__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__nested_webpack_require_586__.p = scriptUrl + "../";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_224__.b = document.baseURI || self.location.href;
+/******/ 		__nested_webpack_require_586__.b = document.baseURI || self.location.href;
 /******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
@@ -21037,8 +21092,13 @@ var __webpack_exports__ = {};
 /*!************************************!*\
   !*** ./src/webrtmp.js + 8 modules ***!
   \************************************/
+// ESM COMPAT FLAG
+__nested_webpack_require_586__.r(__webpack_exports__);
 
-// UNUSED EXPORTS: default
+// EXPORTS
+__nested_webpack_require_586__.d(__webpack_exports__, {
+  "default": () => (/* binding */ webrtmp)
+});
 
 ;// CONCATENATED MODULE: ./src/utils/logger.js
 /*
@@ -22544,7 +22604,7 @@ class WebRTMP_Controller {
 		"AMF": logger.WARN
 	}
 
-	WebRTMPWorker = new Worker(new URL(/* worker import */ __nested_webpack_require_224__.p + __nested_webpack_require_224__.u(306), __nested_webpack_require_224__.b), {
+	WebRTMPWorker = new Worker(new URL(/* worker import */ __nested_webpack_require_586__.p + __nested_webpack_require_586__.u(306), __nested_webpack_require_586__.b), {
 		name: "webrtmp.worker",
 		type: undefined
 		/* webpackEntryOptions: { filename: "dist/[name].js" } */
@@ -22615,6 +22675,10 @@ class WebRTMP_Controller {
 	 */
 	addEventListener(type, listener){
 		this._emitter.addEventListener(type, listener);
+	}
+
+	removeEventListener(type, listener){
+		this._emitter.removeListener(type, listener);
 	}
 
 
@@ -22688,7 +22752,6 @@ class WebRTMP_Controller {
  * limitations under the License.
  *
  */
-
 
 
 
@@ -22797,8 +22860,7 @@ class WebRTMP{
 	play(streamName){
 		return new Promise((resolve, reject)=>{
 			this.wss.play(streamName);
-			this._mediaElement.play();
-			resolve();
+			this._mediaElement.play().then(resolve);
 		});
 	}
 
@@ -22854,7 +22916,6 @@ class WebRTMP{
 		if (this._mediaElement) {
 			this._msectl.detachMediaElement();
 			this._mediaElement.removeEventListener('loadedmetadata', this.e.onvLoadedMetadata);
-			this._mediaElement.removeEventListener('seeking', this.e.onvSeeking);
 			this._mediaElement.removeEventListener('canplay', this.e.onvCanPlay);
 			this._mediaElement.removeEventListener('stalled', this.e.onvStalled);
 			this._mediaElement.removeEventListener('progress', this.e.onvProgress);
@@ -22862,6 +22923,8 @@ class WebRTMP{
 		}
 
 		if (this._msectl) {
+			this.wss.removeEventListener(TransmuxingEvents.INIT_SEGMENT, this._appendInitSegment);
+			this.wss.removeEventListener(TransmuxingEvents.MEDIA_SEGMENT, this._appendMediaSegment);
 			this._msectl.destroy();
 			this._msectl = null;
 		}
@@ -22874,7 +22937,6 @@ class WebRTMP{
 	attachMediaElement(mediaElement) {
 		this._mediaElement = mediaElement;
 		mediaElement.addEventListener('loadedmetadata', this.e.onvLoadedMetadata);
-		mediaElement.addEventListener('seeking', this.e.onvSeeking);
 		mediaElement.addEventListener('canplay', this.e.onvCanPlay);
 		mediaElement.addEventListener('stalled', this.e.onvStalled);
 		mediaElement.addEventListener('progress', this.e.onvProgress);
@@ -22892,28 +22954,29 @@ class WebRTMP{
 			);
 		});
 
-		this.wss.addEventListener(TransmuxingEvents.INIT_SEGMENT, (data)=>{
-			logger.i(this.TAG, TransmuxingEvents.INIT_SEGMENT, data[0], data[1]);
-			this._msectl.appendInitSegment(data[1]);
-		});
-
-		this.wss.addEventListener(TransmuxingEvents.MEDIA_SEGMENT, (data)=>{
-			logger.i(this.TAG, TransmuxingEvents.MEDIA_SEGMENT, data[0], data[1]);
-			this._msectl.appendMediaSegment(data[1]);
-		});
+		this.wss.addEventListener(TransmuxingEvents.INIT_SEGMENT, this._appendInitSegment.bind(this));
+		this.wss.addEventListener(TransmuxingEvents.MEDIA_SEGMENT, this._appendMediaSegment.bind(this));
 
 		this._msectl.attachMediaElement(mediaElement);
+	}
+
+	_appendInitSegment(data){
+		logger.i(this.TAG, TransmuxingEvents.INIT_SEGMENT, data[0], data[1]);
+		this._msectl.appendInitSegment(data[1]);
+	}
+
+	_appendMediaSegment(data){
+		logger.i(this.TAG, TransmuxingEvents.MEDIA_SEGMENT, data[0], data[1]);
+		this._msectl.appendMediaSegment(data[1]);
 	}
 }
 
 /* harmony default export */ const webrtmp = (WebRTMP);
 
-window["Log"] = logger;
-window["webrtmp"] = new WebRTMP();
-
-
+/******/ 	return __webpack_exports__;
 /******/ })()
 ;
+});
 //# sourceMappingURL=webrtmp.js.map
 
 /***/ })
@@ -23198,15 +23261,18 @@ class Log {
 // EXTERNAL MODULE: ./lib/hls.light.js
 var hls_light = __webpack_require__("./lib/hls.light.js");
 var hls_light_default = /*#__PURE__*/__webpack_require__.n(hls_light);
-// EXTERNAL MODULE: ./lib/webrtmp.js
-var webrtmp = __webpack_require__("./lib/webrtmp.js");
 ;// CONCATENATED MODULE: ./src/utils/utils.js
 function getFileExtension(filename){
+    if(!filename) return false;
     return filename.split('.').pop();
 }
 
 function _parseRTMPURL(url){
-    let res = url.match(/rtmp:\/\/([^\/:]*)([:0-9]*)\/([^\/]*)\/(.*)/gi);
+    console.log("_parseRTMP: " + url);
+    if(!url) return false;
+    let res = url.match(/rtmp:\/\/([^\/:]*):{0,1}([0-9]*)\/([^\/]*)\/(.*)/i);
+
+    console.log(res);
 
     if(res && res.length > 0) {     // rtmp
         return {
@@ -23219,8 +23285,10 @@ function _parseRTMPURL(url){
     return false;
 }
 
+// EXTERNAL MODULE: ./lib/webrtmp.js
+var webrtmp = __webpack_require__("./lib/webrtmp.js");
+var webrtmp_default = /*#__PURE__*/__webpack_require__.n(webrtmp);
 ;// CONCATENATED MODULE: ./src/avideo.js
-
 
 
 
@@ -23228,7 +23296,8 @@ function _parseRTMPURL(url){
 
 class AVideo extends HTMLVideoElement{
     TAG = "AVideo";
-    static observedAttributes = ['src'];
+
+    //static observedAttributes = ['src'];
 
     streamurl = "";
 
@@ -23249,16 +23318,22 @@ class AVideo extends HTMLVideoElement{
 
         logger.d(this.TAG, "construct");
 
-        this.webrtmp = window.webrtmp;
+        this.webrtmp = new (webrtmp_default())();//window.webrtmp;
+        this.hls = new (hls_light_default())(this.hls_config);
     }
 
-    play(){
-        logger.d(this.TAG, "play");
+    playURL(streamurl){
+        if(streamurl && streamurl !== this.streamurl) this.streamurl = streamurl;
+
+        logger.d(this.TAG, "play: " + this.streamurl);
 
         const parts = _parseRTMPURL(this.streamurl);
 
         if(parts){
-            logger.d(this.TAG, "WebRTMP play");
+            logger.d(this.TAG, "WebRTMP play: ", parts);
+            if(this.attached && this.attached !== "WebRTMP") this._detach();
+            if(!this.attached) this._attach("WebRTMP");
+
             this.webrtmp.open(parts["server"], parts["port"]).then(()=>{
                 this.webrtmp.connect(parts["app"]).then(()=>{
                     return this.webrtmp.play(parts["stream"]);
@@ -23266,28 +23341,75 @@ class AVideo extends HTMLVideoElement{
             });
 
         } else if(getFileExtension(this.streamurl) === "m3u8"){
-            logger.d(this.TAG, "super.play");
+            logger.d(this.TAG, "super.play2");
+            if(this.attached && this.attached !== "HLS") this._detach();
+
+            this.hls.loadSource(this.streamurl);
+
+            if(!this.attached) this._attach("HLS");
 
             return new Promise((resolve)=>{
                 logger.d(this.TAG, "starting HLS");
-
-                this.hls = new (hls_light_default())(this.hls_config);
-
-                this.hls.on((hls_light_default()).Events.MEDIA_ATTACHED, () => {
-                    console.log("MEDIA_ATTACHED");
-                    this.hls.loadSource(this.streamurl);
-                });
-
-                this.hls.on((hls_light_default()).Events.MANIFEST_PARSED, (event, data) => {
-                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
-                    super.play().then(resolve);
-                });
+                resolve();
             });
 
         } else {
+            //if(this.attached) this._detach();
+
+            logger.d(this.TAG, "super.play:" + super.src + " = " + this.src);
+            super.src = this.streamurl;
             return super.play();
         }
     }
+
+    _detach(){
+        logger.d(this.TAG, "_detach");
+        switch(this.attached){
+            case "HLS":
+                this.hls.stopLoad();
+                this.hls.detachMedia(this);
+                break;
+
+            case "WebRTMP":
+                this.webrtmp.stop();
+                this.webrtmp.detachMediaElement(this);
+                break;
+        }
+
+        this.attached = false;
+    }
+
+    _attach(type){
+        logger.d(this.TAG, "_attach: " + type);
+        this.attached = type;
+
+        switch(type){
+        case "HLS":
+            this.hls.attachMedia(this);
+            break;
+
+        case "WebRTMP":
+            this.webrtmp.attachMediaElement(this);
+            break;
+        }
+    }
+
+    /*
+    pause(){
+        switch(this.attached){
+            case "HLS":
+                this.hls.stopLoad();
+                break;
+
+            case "WebRTMP":
+                this.webrtmp.pause();
+                break;
+
+            default:
+                super.pause();
+                break;
+        }
+    }*/
 
     connectedCallback(){
         logger.d(this.TAG, "connected");
@@ -23302,6 +23424,7 @@ class AVideo extends HTMLVideoElement{
         logger.d(this.TAG, 'adoptedCallback');
     }
 
+    /*
     attributeChangedCallback(name, oldValue, newValue) {
         console.log("attributeChangedCallback: " + name);
         switch(name) {
@@ -23311,31 +23434,22 @@ class AVideo extends HTMLVideoElement{
             const parts = _parseRTMPURL(this.streamurl);
 
             if(parts){
-                logger.i(this.TAG, "loading RTMP");
-                this.webrtmp.attachMediaElement(this);
+                Log.i(this.TAG, "loading RTMP");
+
 
             } else if(getFileExtension(this.streamurl) === "m3u8"){
-                logger.i(this.TAG, "preparing HLS");
+                Log.i(this.TAG, "preparing HLS");
+
 
             } else {
-
-                //this.src = this.streamurl;
+                //if(this.attached && this.attached !== "HLS") this._detach();
+                // Nothing to do, because setter has already setted src
             }
 
             break;
         }
-    }
+    }*/
 
-    get src(){
-        logger.d("getSrc");
-        return this.streamurl;
-    }
-
-    set src(val) {
-        logger.d("setSrc: " + val);
-        this.streamurl = val;
-        this.setAttribute("src", val);
-    }
 }
 
 customElements.define("very-cool", AVideo, { extends: "video" });

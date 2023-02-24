@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>WebRTMP-Demo</title>
   <script type="text/javascript" src="dist/avideo.js"></script>
+  <style>
+    video {
+      width: 320px;
+      height: 190px;
+    }
+  </style>
 </head>
 <body>
 <h1>All Video Player</h1><br>
@@ -22,8 +28,7 @@
     const output = document.getElementById("output");
 
     function play(url){
-        output.src = url;
-        output.play();
+        output.playURL(url);
     }
 </script>
 </body>
