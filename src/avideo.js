@@ -1,7 +1,7 @@
 import Log from "./utils/logger";
 import Hls from "../lib/hls.light";
 import {_parseRTMPURL, getFileExtension} from "./utils/utils";
-import WebRTMP from "../lib/webrtmp";
+import { WebRTMP } from "../lib/webrtmp";
 
 export class AVideo extends HTMLVideoElement{
     TAG = "AVideo";
@@ -19,7 +19,7 @@ export class AVideo extends HTMLVideoElement{
         //startFragPrefetch: false,
         //maxFragLookUpTolerance: 0.5,
         initialLiveManifestSize: 3,
-        liveSyncDurationCount: 3		// 2 fragments before playing
+        liveSyncDurationCount: 3		// 3 fragments before playing
     }
 
     constructor() {
@@ -27,8 +27,18 @@ export class AVideo extends HTMLVideoElement{
 
         Log.d(this.TAG, "construct");
 
-        this.webrtmp = new WebRTMP();//window.webrtmp;
+        this.webrtmp = new WebRTMP();
         this.hls = new Hls(this.hls_config);
+    }
+
+    stop(){
+        switch(this.attached){
+        case "WebRTMP":
+            break;
+
+        case "HLS":
+            break;
+        }
     }
 
     playURL(streamurl){
@@ -63,7 +73,7 @@ export class AVideo extends HTMLVideoElement{
             });
 
         } else {
-            //if(this.attached) this._detach();
+            if(this.attached) this._detach();
 
             Log.d(this.TAG, "super.play:" + super.src + " = " + this.src);
             super.src = this.streamurl;
@@ -72,7 +82,7 @@ export class AVideo extends HTMLVideoElement{
     }
 
     _detach(){
-        Log.d(this.TAG, "_detach");
+        Log.d(this.TAG, "_detach: "+ this.attached);
         switch(this.attached){
             case "HLS":
                 this.hls.stopLoad();
@@ -80,8 +90,8 @@ export class AVideo extends HTMLVideoElement{
                 break;
 
             case "WebRTMP":
-                this.webrtmp.stop();
-                this.webrtmp.detachMediaElement(this);
+                this.webrtmp.stopLoad();
+                this.webrtmp.detachMediaElement();
                 break;
         }
 
@@ -103,25 +113,8 @@ export class AVideo extends HTMLVideoElement{
         }
     }
 
-    /*
-    pause(){
-        switch(this.attached){
-            case "HLS":
-                this.hls.stopLoad();
-                break;
-
-            case "WebRTMP":
-                this.webrtmp.pause();
-                break;
-
-            default:
-                super.pause();
-                break;
-        }
-    }*/
-
     connectedCallback(){
-        Log.d(this.TAG, "connected");
+        Log.d(this.TAG, "connectedCallback");
         if(this.hasAttribute("src")) this.src = this.getAttribute("src");
     }
 
@@ -158,7 +151,6 @@ export class AVideo extends HTMLVideoElement{
             break;
         }
     }*/
-
 }
 
 customElements.define("very-cool", AVideo, { extends: "video" });

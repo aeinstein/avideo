@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>WebRTMP-Demo</title>
-  <script type="text/javascript" src="dist/avideo.js"></script>
-  <style>
-    video {
-      width: 320px;
-      height: 190px;
-    }
-  </style>
-</head>
-<body>
-<h1>All Video Player</h1><br>
+All-In Videoplayer
+======
+A HTML5 customElement which extends the classic Video Element
 
-<script>
-  window.nonce = "12345abcd";
-</script>
+## Formats
+- All default Videoelement Formats
+- HLS  by [hls.js](https://github.com/video-dev/hls.js/)
+- RTMP over WSS by [WebRTMP](https://github.com/aeinstein/webrtmp.js)
+
+Demo
+[https://bunkertv.org/avideo/index.html](https://bunkertv.org/avideo/index.html)
+
+
+```html
+<script type="text/javascript" src="dist/avideo.js"></script>
 
 <video controls loop autoplay is="very-cool" id="output"></video>
-<br><br>
+
 <button onclick="play('https://bunkertv.org/css/logo_neu.mp4')">Play Mp4</button><br>
 <button onclick="play('https://bunkertv.org/hls/fab5bc692e71e17fba34e92d47e64fd0.m3u8')">Play HLS</button><br>
 <button onclick="play('rtmp://bunkertv.org:9001/demo/livetest')">Play RTMP</button><br>
@@ -29,7 +25,7 @@
 
     function play(url){
         output.playURL(url);
-    }
+    }    
 </script>
-</body>
-</html>
+```
+

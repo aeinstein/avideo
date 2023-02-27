@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MagicVideo.iml" filepath="$PROJECT_DIR$/.idea/MagicVideo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../webrtmp/.idea/WebRTMP.iml" filepath="$PROJECT_DIR$/../webrtmp/.idea/WebRTMP.iml" />
     </modules>
   </component>
 </project>

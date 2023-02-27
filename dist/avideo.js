@@ -20974,30 +20974,30 @@ var XhrLoader = /*#__PURE__*/function () {
 /*!************************!*\
   !*** ./lib/webrtmp.js ***!
   \************************/
-/***/ ((module) => {
+/***/ (function(module) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory();
 	else {}
-})(self, () => {
+})(this, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({});
 /************************************************************************/
 /******/ 	// The require scope
-/******/ 	var __nested_webpack_require_586__ = {};
+/******/ 	var __nested_webpack_require_590__ = {};
 /******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__nested_webpack_require_586__.m = __webpack_modules__;
+/******/ 	__nested_webpack_require_590__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__nested_webpack_require_586__.d = (exports, definition) => {
+/******/ 		__nested_webpack_require_590__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
-/******/ 				if(__nested_webpack_require_586__.o(definition, key) && !__nested_webpack_require_586__.o(exports, key)) {
+/******/ 				if(__nested_webpack_require_590__.o(definition, key) && !__nested_webpack_require_590__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
@@ -21007,15 +21007,15 @@ return /******/ (() => { // webpackBootstrap
 /******/ 	/* webpack/runtime/get javascript chunk filename */
 /******/ 	(() => {
 /******/ 		// This function allow to reference async chunks
-/******/ 		__nested_webpack_require_586__.u = (chunkId) => {
+/******/ 		__nested_webpack_require_590__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "dist/" + "webrtmp.worker" + ".js";
+/******/ 			return "" + "webrtmp.worker" + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_586__.g = (function() {
+/******/ 		__nested_webpack_require_590__.g = (function() {
 /******/ 			if (typeof globalThis === 'object') return globalThis;
 /******/ 			try {
 /******/ 				return this || new Function('return this')();
@@ -21027,13 +21027,13 @@ return /******/ (() => { // webpackBootstrap
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_586__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 		__nested_webpack_require_590__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__nested_webpack_require_586__.r = (exports) => {
+/******/ 		__nested_webpack_require_590__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
@@ -21044,8 +21044,8 @@ return /******/ (() => { // webpackBootstrap
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
 /******/ 		var scriptUrl;
-/******/ 		if (__nested_webpack_require_586__.g.importScripts) scriptUrl = __nested_webpack_require_586__.g.location + "";
-/******/ 		var document = __nested_webpack_require_586__.g.document;
+/******/ 		if (__nested_webpack_require_590__.g.importScripts) scriptUrl = __nested_webpack_require_590__.g.location + "";
+/******/ 		var document = __nested_webpack_require_590__.g.document;
 /******/ 		if (!scriptUrl && document) {
 /******/ 			if (document.currentScript)
 /******/ 				scriptUrl = document.currentScript.src
@@ -21058,12 +21058,12 @@ return /******/ (() => { // webpackBootstrap
 /******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
 /******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__nested_webpack_require_586__.p = scriptUrl + "../";
+/******/ 		__nested_webpack_require_590__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
-/******/ 		__nested_webpack_require_586__.b = document.baseURI || self.location.href;
+/******/ 		__nested_webpack_require_590__.b = document.baseURI || self.location.href;
 /******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
@@ -21089,15 +21089,16 @@ return /******/ (() => { // webpackBootstrap
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!************************************!*\
-  !*** ./src/webrtmp.js + 8 modules ***!
-  \************************************/
+/*!**********************************!*\
+  !*** ./src/index.js + 9 modules ***!
+  \**********************************/
 // ESM COMPAT FLAG
-__nested_webpack_require_586__.r(__webpack_exports__);
+__nested_webpack_require_590__.r(__webpack_exports__);
 
 // EXPORTS
-__nested_webpack_require_586__.d(__webpack_exports__, {
-  "default": () => (/* binding */ webrtmp)
+__nested_webpack_require_590__.d(__webpack_exports__, {
+  "WebRTMP": () => (/* reexport */ WebRTMP),
+  "createWebRTMP": () => (/* binding */ createWebRTMP)
 });
 
 ;// CONCATENATED MODULE: ./src/utils/logger.js
@@ -21336,6 +21337,7 @@ class Log {
 class EventEmitter{
 	ListenerList = [];
 	TAG = "EventEmitter";
+	waiters = [];
 
 	constructor() {
 	}
@@ -21344,41 +21346,78 @@ class EventEmitter{
 	 *
 	 * @param {String} event
 	 * @param {Function} listener
+	 * @param {boolean} modal
 	 */
-	addEventListener(event, listener){
-		this.ListenerList.push([event, listener]);
-	}
+	addEventListener(event, listener, modal = false){
+		logger.d(this.TAG, "addEventListener: " + event);
 
-	/**
-	 *
-	 * @param {String} event
-	 * @param {Function} listener
-	 */
-	addListener(event, listener){
-		this.ListenerList.push([event, listener]);
-	}
-
-
-	/**
-	 *
-	 * @param {String} event
-	 * @param {Function} listener
-	 */
-	removeListener(event, listener){
 		for(let i = 0; i < this.ListenerList.length;i++){
 			let entry = this.ListenerList[i];
-			if(entry[0] == event && entry[1] == listener){
+			if(entry[0] === event) {
+				if (modal || entry[1] === listener) {
+					logger.w(this.TAG, "Listener already registered, overriding");
+					return;
+				}
+			}
+		}
+		this.ListenerList.push([event, listener]);
+	}
+
+	waitForEvent(event, callback){
+		this.waiters.push([event, callback]);
+	}
+
+	/**
+	 *
+	 * @param {String} event
+	 * @param {Function} listener
+	 * @param {boolean} modal
+	 */
+	addListener(event, listener, modal){
+		this.addEventListener(event, listener, modal);
+	}
+
+
+	/**
+	 *
+	 * @param {String} event
+	 * @param {Function} listener
+	 */
+	removeEventListener(event, listener){
+		logger.d(this.TAG, "removeEventListener: " + event);
+
+		for(let i = 0; i < this.ListenerList.length;i++){
+			let entry = this.ListenerList[i];
+			if(entry[0] === event && entry[1] === listener){
 				this.ListenerList.splice(i,1);
 				return;
 			}
 		}
 	}
 
+	removeListener(event, listener){
+		this.removeEventListener(event, listener);
+	}
+
 	/**
 	 * Remove all listener
 	 */
-	removeAllListeners(){
-		this.ListenerList = [];
+	removeAllEventListener(event){
+		logger.d(this.TAG, "removeAllEventListener: ", event);
+		if(event) {
+			for(let i = 0; i < this.ListenerList.length;i++) {
+				let entry = this.ListenerList[i];
+				if(entry[0] === event){
+					this.ListenerList.splice(i,1);
+					i--;
+				}
+			}
+		} else
+			this.ListenerList = [];
+	}
+
+	removeAllListener(event){
+		this.removeAllEventListener(event);
 	}
 
 	/**
@@ -21388,6 +21427,18 @@ class EventEmitter{
 	 */
 	emit(event, ...data){
 		logger.t(this.TAG, "emit EVENT: " + event, ...data);
+
+		for(let i = 0; i < this.waiters.length;i++){
+			let entry = this.waiters[i];
+
+			if(entry[0] === event){
+				logger.d(this.TAG, "hit waiting event: " + event);
+				entry[1].call(this, ...data);
+				this.waiters.splice(i,1);
+				i--;
+			}
+		}
+
 		for(let i = 0; i < this.ListenerList.length;i++){
 			let entry = this.ListenerList[i];
 			if(entry[0] === event){
@@ -22100,7 +22151,7 @@ class MSEController {
 			this.detachMediaElement();
 		}
 		this.e = null;
-		this._emitter.removeAllListeners();
+		this._emitter.removeAllListener();
 		this._emitter = null;
 	}
 
@@ -22113,6 +22164,7 @@ class MSEController {
 	}
 
 	attachMediaElement(mediaElement) {
+		logger.i(this.TAG, "attach");
 		if (this._mediaSource) {
 			throw new IllegalStateException('MediaSource has been attached to an HTMLMediaElement!');
 		}
@@ -22127,8 +22179,20 @@ class MSEController {
 	}
 
 	detachMediaElement() {
+		logger.i(this.TAG, "detach");
+
 		if (this._mediaSource) {
 			let ms = this._mediaSource;
+
+			if (ms.readyState === 'open') {
+				try {
+					ms.endOfStream();
+				} catch (error) {
+					logger.e(this.TAG, error.message);
+				}
+			}
+
+
 			for (let type in this._sourceBuffers) {
 				// pending segments should be discard
 				let ps = this._pendingSegments[type];
@@ -22140,9 +22204,11 @@ class MSEController {
 				// remove all sourcebuffers
 				let sb = this._sourceBuffers[type];
 				if (sb) {
+					logger.i(this.TAG, "try to remove sourcebuffer: " + type);
 					if (ms.readyState !== 'closed') {
 						// ms edge can throw an error: Unexpected call to method or property access
 						try {
+							logger.i(this.TAG, "removing sourcebuffer: " + type);
 							ms.removeSourceBuffer(sb);
 						} catch (error) {
 							logger.e(this.TAG, error.message);
@@ -22154,13 +22220,15 @@ class MSEController {
 					this._sourceBuffers[type] = null;
 				}
 			}
-			if (ms.readyState === 'open') {
-				try {
-					ms.endOfStream();
-				} catch (error) {
-					logger.e(this.TAG, error.message);
-				}
-			}
+
+
+
+			// proprerly remove sourcebuffers
+			/*
+			for(let mimeType in this._sourceBuffers) {
+				this._mediaSource.removeSourceBuffer(this._sourceBuffers[mimeType]);
+			}*/
+
 			ms.removeEventListener('sourceopen', this.e.onSourceOpen);
 			ms.removeEventListener('sourceended', this.e.onSourceEnded);
 			ms.removeEventListener('sourceclose', this.e.onSourceClose);
@@ -22168,6 +22236,9 @@ class MSEController {
 			this._isBufferFull = false;
 			this._idrList.clear();
 			this._mediaSource = null;
+
+		} else {
+			logger.w(this.TAG, "no mediasource attached");
 		}
 
 		if (this._mediaElement) {
@@ -22175,6 +22246,7 @@ class MSEController {
 			this._mediaElement.removeAttribute('src');
 			this._mediaElement = null;
 		}
+
 		if (this._mediaSourceObjectURL) {
 			window.URL.revokeObjectURL(this._mediaSourceObjectURL);
 			this._mediaSourceObjectURL = null;
@@ -22254,64 +22326,6 @@ class MSEController {
 		}
 	}
 
-	seek(seconds) {
-		// remove all appended buffers
-		for (let type in this._sourceBuffers) {
-			if (!this._sourceBuffers[type]) {
-				continue;
-			}
-
-			// abort current buffer append algorithm
-			let sb = this._sourceBuffers[type];
-			if (this._mediaSource.readyState === 'open') {
-				try {
-					// If range removal algorithm is running, InvalidStateError will be throwed
-					// Ignore it.
-					sb.abort();
-				} catch (error) {
-					logger.e(this.TAG, error.message);
-				}
-			}
-
-			// IDRList should be clear
-			this._idrList.clear();
-
-			// pending segments should be discard
-			let ps = this._pendingSegments[type];
-			ps.splice(0, ps.length);
-
-			if (this._mediaSource.readyState === 'closed') {
-				// Parent MediaSource object has been detached from HTMLMediaElement
-				continue;
-			}
-
-			// record ranges to be remove from SourceBuffer
-			for (let i = 0; i < sb.buffered.length; i++) {
-				let start = sb.buffered.start(i);
-				let end = sb.buffered.end(i);
-				this._pendingRemoveRanges[type].push({start, end});
-			}
-
-			// if sb is not updating, let's remove ranges now!
-			if (!sb.updating) {
-				this._doRemoveRanges();
-			}
-
-			// Safari 10 may get InvalidStateError in the later appendBuffer() after SourceBuffer.remove() call
-			// Internal parser's state may be invalid at this time. Re-append last InitSegment to workaround.
-			// Related issue: https://bugs.webkit.org/show_bug.cgi?id=159230
-			if (browser.safari) {
-				let lastInitSegment = this._lastInitSegments[type];
-				if (lastInitSegment) {
-					this._pendingSegments[type].push(lastInitSegment);
-					if (!sb.updating) {
-						this._doAppendSegments();
-					}
-				}
-			}
-		}
-	}
-
 	endOfStream() {
 		let ms = this._mediaSource;
 		let sb = this._sourceBuffers;
@@ -22334,10 +22348,6 @@ class MSEController {
 			// Otherwise MediaElement's ended event may not be triggered
 			ms.endOfStream();
 		}
-	}
-
-	getNearestKeyframe(dts) {
-		return this._idrList.getLastSyncPointBeforeDts(dts);
 	}
 
 	_needCleanupSourceBuffer() {
@@ -22598,16 +22608,16 @@ class WebRTMP_Controller {
 		"Transmuxer": logger.WARN,
 		"EventEmitter": logger.DEBUG,
 		"MSEController": logger.INFO,
-		"WebRTMP": logger.WARN,
+		"WebRTMP": logger.DEBUG,
 		"WebRTMP_Controller": logger.WARN,
 		"WebRTMP Worker": logger.WARN,
 		"AMF": logger.WARN
 	}
 
-	WebRTMPWorker = new Worker(new URL(/* worker import */ __nested_webpack_require_586__.p + __nested_webpack_require_586__.u(306), __nested_webpack_require_586__.b), {
+	WebRTMPWorker = new Worker(new URL(/* worker import */ __nested_webpack_require_590__.p + __nested_webpack_require_590__.u(306), __nested_webpack_require_590__.b), {
 		name: "webrtmp.worker",
 		type: undefined
-		/* webpackEntryOptions: { filename: "dist/[name].js" } */
+		/* webpackEntryOptions: { filename: "[name].js" } */
 	});
 
 	constructor() {
@@ -22624,22 +22634,25 @@ class WebRTMP_Controller {
 	 *
 	 * @param {String|null} host
 	 * @param {Number|null} port
-	 * @returns {boolean}
 	 */
 	open(host, port){
-		if(this.isConnected) return false;
+		return new Promise((resolve, reject)=>{
+			if(this.isConnected) return reject("Already Connected. Please disconnect first");
+			this._emitter.waitForEvent("RTMPHandshakeDone", resolve);
+			this._emitter.waitForEvent("WSSConnectFailed", reject);
 
-		if(host) this.host = host;
-		if(port) this.port = port;
+			if(host) this.host = host;
+			if(port) this.port = port;
 
-		this.WebRTMPWorker.postMessage({cmd: "open", host: this.host, port: this.port});
+			this.WebRTMPWorker.postMessage({cmd: "open", host: this.host, port: this.port});
+		})
 	}
 
 	/**
 	 * Websocket disconnect
 	 */
 	disconnect() {
-		this.WSSReconnect = true;
+		this.WSSReconnect = false;
 		this.WebRTMPWorker.postMessage({cmd: "disconnect"});
 	}
 
@@ -22648,7 +22661,11 @@ class WebRTMP_Controller {
 	 * @param {String} appName
 	 */
 	connect(appName){
-		this.WebRTMPWorker.postMessage({cmd: "connect", appName: appName});
+		return new Promise((resolve, reject)=>{
+			this._emitter.waitForEvent("RTMPStreamCreated", resolve);
+			this.WebRTMPWorker.postMessage({cmd: "connect", appName: appName});
+		})
+
 	}
 
 	/**
@@ -22672,13 +22689,18 @@ class WebRTMP_Controller {
 	 * Eventlistener hinzufügenm
 	 * @param type
 	 * @param listener
+	 * @param {boolean} modal
 	 */
-	addEventListener(type, listener){
-		this._emitter.addEventListener(type, listener);
+	addEventListener(type, listener, modal){
+		this._emitter.addEventListener(type, listener, modal);
 	}
 
 	removeEventListener(type, listener){
-		this._emitter.removeListener(type, listener);
+		this._emitter.removeEventListener(type, listener);
+	}
+
+	removeAllEventListener(type){
+		this._emitter.removeAllEventListener(type);
 	}
 
 
@@ -22794,7 +22816,11 @@ class WebRTMP{
 			onvLoadedMetadata: this._onvLoadedMetadata.bind(this),
 			onvCanPlay: this._onvCanPlay.bind(this),
 			onvStalled: this._onvStalled.bind(this),
-			onvProgress: this._onvProgress.bind(this)
+			onvProgress: this._onvProgress.bind(this),
+			onvPlay: this._onvPlay.bind(this),
+			onvPause: this._onvPause.bind(this),
+			onAppendInitSegment: this._appendMediaSegment.bind(this),
+			onAppendMediaSegment: this._appendMediaSegment.bind(this)
 		};
 	}
 
@@ -22804,7 +22830,7 @@ class WebRTMP{
 			let buffered = media.buffered;
 			if (buffered.length > 0 && media.currentTime < buffered.start(0)) {
 				logger.w(this.TAG, `Playback seems stuck at ${media.currentTime}, seek to ${buffered.start(0)}`);
-				this._requestSetTime = true;
+				//this._requestSetTime = true;
 				this._mediaElement.currentTime = buffered.start(0);
 				this._mediaElement.removeEventListener('progress', this.e.onvProgress);
 			}
@@ -22814,7 +22840,7 @@ class WebRTMP{
 		}
 	}
 
-	_onvLoadedMetadata(e) {
+	_onvLoadedMetadata() {
 		if (this._pendingSeekTime != null) {
 			this._mediaElement.currentTime = this._pendingSeekTime;
 			this._pendingSeekTime = null;
@@ -22822,16 +22848,19 @@ class WebRTMP{
 	}
 
 	_onvCanPlay(e) {
-		this._mediaElement.play();
+		logger.d(this.TAG, "onvCanPlay", e);
+		this._mediaElement.play().then(()=>{
+			logger.d(this.TAG, "promise play");
+		});
 		this._receivedCanPlay = true;
 		this._mediaElement.removeEventListener('canplay', this.e.onvCanPlay);
 	}
 
-	_onvStalled(e) {
+	_onvStalled() {
 		this._checkAndResumeStuckPlayback(true);
 	}
 
-	_onvProgress(e) {
+	_onvProgress() {
 		this._checkAndResumeStuckPlayback();
 	}
 
@@ -22839,17 +22868,30 @@ class WebRTMP{
 		logger.w(this.TAG, 'MSE SourceBuffer is full');
 	}
 
+	_onvPlay(e){
+		logger.d(this.TAG, "play:", e);
+		this.pause(false);
+	}
+
+	_onvPause(e) {
+		logger.d(this.TAG, "pause", e);
+		this.pause(true);
+	}
+
 	destroy() {
+		logger.w(this.TAG, "destroy webrtmp");
 		if (this._mediaElement) {
 			this.detachMediaElement();
 		}
 		this.e = null;
-		this._emitter.removeAllListeners();
+		this._emitter.removeAllListener();
 		this._emitter = null;
 	}
 
 	disconnect(){
 		this.wss.disconnect();
+		this.wss.removeAllEventListener("RTMPHandshakeDone");
+		this.wss.removeAllEventListener("WSSConnectFailed");
 	}
 
 	/**
@@ -22858,14 +22900,12 @@ class WebRTMP{
 	 * @returns {Promise<unknown>}
 	 */
 	play(streamName){
-		return new Promise((resolve, reject)=>{
-			this.wss.play(streamName);
-			this._mediaElement.play().then(resolve);
-		});
+		this.wss.play(streamName);
+		return this._mediaElement.play();
 	}
 
-	stop(){
-		this.wss.stop()
+	stopLoad(){
+		//this.wss.stop()
 		this._mediaElement.pause();
 	}
 
@@ -22876,20 +22916,7 @@ class WebRTMP{
 	 * @returns {Promise<unknown>}
 	 */
 	open(host, port){
-		return new Promise((resolve, reject)=>{
-			this.wss.addEventListener("RTMPHandshakeDone", (success)=>{
-				logger.d(this.TAG,"RTMPHandshakeDone");
-				if(success) resolve();
-				else reject();
-			});
-
-			this.wss.addEventListener("WSSConnectFailed", ()=>{
-				logger.d(this.TAG,"WSSConnectFailed");
-				reject();
-			});
-
-			this.wss.open(host, port);
-		})
+		return this.wss.open(host, port);
 	}
 
 	/**
@@ -22898,36 +22925,44 @@ class WebRTMP{
 	 * @returns {Promise<unknown>}
 	 */
 	connect(appName){
-		return new Promise((resolve, reject)=>{
-			this.wss.addEventListener("RTMPStreamCreated", (cmd, stream_id)=>{
-				logger.d(this.TAG,"RTMPStreamCreated: " + stream_id);
-				resolve();
-			});
-
-			this.wss.connect(appName);
-		})
+		return this.wss.connect(appName);
 	}
 
 	pause(enable){
 		this.wss.pause(enable);
+
+		if(enable) {
+			this._mediaElement.pause();
+
+		} else {
+			this.kerkDown = 10;
+			this._mediaElement.play().then(()=>{
+
+			});
+		}
 	}
 
 	detachMediaElement() {
+		this.wss.removeAllEventListener(TransmuxingEvents.INIT_SEGMENT);
+		this.wss.removeAllEventListener(TransmuxingEvents.MEDIA_SEGMENT);
+
 		if (this._mediaElement) {
 			this._msectl.detachMediaElement();
 			this._mediaElement.removeEventListener('loadedmetadata', this.e.onvLoadedMetadata);
 			this._mediaElement.removeEventListener('canplay', this.e.onvCanPlay);
 			this._mediaElement.removeEventListener('stalled', this.e.onvStalled);
 			this._mediaElement.removeEventListener('progress', this.e.onvProgress);
+			this._mediaElement.removeEventListener('play', this.e.onvPlay);
+			this._mediaElement.removeEventListener('pause', this.e.onvPause);
 			this._mediaElement = null;
 		}
 
 		if (this._msectl) {
-			this.wss.removeEventListener(TransmuxingEvents.INIT_SEGMENT, this._appendInitSegment);
-			this.wss.removeEventListener(TransmuxingEvents.MEDIA_SEGMENT, this._appendMediaSegment);
 			this._msectl.destroy();
 			this._msectl = null;
 		}
+
+		this.disconnect();
 	}
 
 	/**
@@ -22940,6 +22975,8 @@ class WebRTMP{
 		mediaElement.addEventListener('canplay', this.e.onvCanPlay);
 		mediaElement.addEventListener('stalled', this.e.onvStalled);
 		mediaElement.addEventListener('progress', this.e.onvProgress);
+		mediaElement.addEventListener('play', this.e.onvPlay);
+		mediaElement.addEventListener('pause', this.e.onvPause);
 
 		this._msectl = new mse_controller(defaultConfig);
 
@@ -22954,8 +22991,8 @@ class WebRTMP{
 			);
 		});
 
-		this.wss.addEventListener(TransmuxingEvents.INIT_SEGMENT, this._appendInitSegment.bind(this));
-		this.wss.addEventListener(TransmuxingEvents.MEDIA_SEGMENT, this._appendMediaSegment.bind(this));
+		this.wss.addEventListener(TransmuxingEvents.INIT_SEGMENT, this._appendInitSegment.bind(this), true);
+		this.wss.addEventListener(TransmuxingEvents.MEDIA_SEGMENT, this._appendMediaSegment.bind(this), true);
 
 		this._msectl.attachMediaElement(mediaElement);
 	}
@@ -22966,12 +23003,48 @@ class WebRTMP{
 	}
 
 	_appendMediaSegment(data){
-		logger.i(this.TAG, TransmuxingEvents.MEDIA_SEGMENT, data[0], data[1]);
+		logger.t(this.TAG, TransmuxingEvents.MEDIA_SEGMENT, data[0], data[1]);
 		this._msectl.appendMediaSegment(data[1]);
+		if(this.kerkDown) {
+			this.kerkDown--;
+			this._mediaElement.currentTime = 2000000000;
+
+			if(!this.kerkDown) logger.d(this.TAG, "kerkdown reached");
+		}
 	}
 }
 
-/* harmony default export */ const webrtmp = (WebRTMP);
+window["Log"] = logger;
+
+;// CONCATENATED MODULE: ./src/index.js
+/*
+ *
+ * Copyright (C) 2023 itNOX. All Rights Reserved.
+ *
+ * @author Michael Balen <mb@itnox.de>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+
+
+
+
+
+function createWebRTMP(){
+    return new WebRTMP();
+}
 
 /******/ 	return __webpack_exports__;
 /******/ })()
@@ -23287,7 +23360,6 @@ function _parseRTMPURL(url){
 
 // EXTERNAL MODULE: ./lib/webrtmp.js
 var webrtmp = __webpack_require__("./lib/webrtmp.js");
-var webrtmp_default = /*#__PURE__*/__webpack_require__.n(webrtmp);
 ;// CONCATENATED MODULE: ./src/avideo.js
 
 
@@ -23310,7 +23382,7 @@ class AVideo extends HTMLVideoElement{
         //startFragPrefetch: false,
         //maxFragLookUpTolerance: 0.5,
         initialLiveManifestSize: 3,
-        liveSyncDurationCount: 3		// 2 fragments before playing
+        liveSyncDurationCount: 3		// 3 fragments before playing
     }
 
     constructor() {
@@ -23318,8 +23390,18 @@ class AVideo extends HTMLVideoElement{
 
         logger.d(this.TAG, "construct");
 
-        this.webrtmp = new (webrtmp_default())();//window.webrtmp;
+        this.webrtmp = new webrtmp.WebRTMP();
         this.hls = new (hls_light_default())(this.hls_config);
+    }
+
+    stop(){
+        switch(this.attached){
+        case "WebRTMP":
+            break;
+
+        case "HLS":
+            break;
+        }
     }
 
     playURL(streamurl){
@@ -23354,7 +23436,7 @@ class AVideo extends HTMLVideoElement{
             });
 
         } else {
-            //if(this.attached) this._detach();
+            if(this.attached) this._detach();
 
             logger.d(this.TAG, "super.play:" + super.src + " = " + this.src);
             super.src = this.streamurl;
@@ -23363,7 +23445,7 @@ class AVideo extends HTMLVideoElement{
     }
 
     _detach(){
-        logger.d(this.TAG, "_detach");
+        logger.d(this.TAG, "_detach: "+ this.attached);
         switch(this.attached){
             case "HLS":
                 this.hls.stopLoad();
@@ -23371,8 +23453,8 @@ class AVideo extends HTMLVideoElement{
                 break;
 
             case "WebRTMP":
-                this.webrtmp.stop();
-                this.webrtmp.detachMediaElement(this);
+                this.webrtmp.stopLoad();
+                this.webrtmp.detachMediaElement();
                 break;
         }
 
@@ -23394,25 +23476,8 @@ class AVideo extends HTMLVideoElement{
         }
     }
 
-    /*
-    pause(){
-        switch(this.attached){
-            case "HLS":
-                this.hls.stopLoad();
-                break;
-
-            case "WebRTMP":
-                this.webrtmp.pause();
-                break;
-
-            default:
-                super.pause();
-                break;
-        }
-    }*/
-
     connectedCallback(){
-        logger.d(this.TAG, "connected");
+        logger.d(this.TAG, "connectedCallback");
         if(this.hasAttribute("src")) this.src = this.getAttribute("src");
     }
 
@@ -23449,7 +23514,6 @@ class AVideo extends HTMLVideoElement{
             break;
         }
     }*/
-
 }
 
 customElements.define("very-cool", AVideo, { extends: "video" });
