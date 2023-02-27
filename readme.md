@@ -1,16 +1,20 @@
 All-In Videoplayer
 ======
-A HTML5 customElement which extends the classic Video Element
+A HTML5 customElement which extends the classic HTML5 Video Element.
+
+HLS and RTMP with just with one script import.
+
 
 ## Formats
 - All default Videoelement Formats
 - HLS  by [hls.js](https://github.com/video-dev/hls.js/)
 - RTMP over WSS by [WebRTMP](https://github.com/aeinstein/webrtmp.js)
 
-Demo
+## Demo
 [https://bunkertv.org/avideo/index.html](https://bunkertv.org/avideo/index.html)
 
 
+## Getting started
 ```html
 <script type="text/javascript" src="dist/avideo.js"></script>
 
@@ -29,3 +33,5 @@ Demo
 </script>
 ```
 
+## State
+proof-of-concept
