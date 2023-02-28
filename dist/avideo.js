@@ -23146,7 +23146,7 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 /*!***********************************!*\
-  !*** ./src/avideo.js + 2 modules ***!
+  !*** ./src/avideo.js + 4 modules ***!
   \***********************************/
 
 // UNUSED EXPORTS: AVideo
@@ -23390,7 +23390,371 @@ function _parseRTMPURL(url){
 
 // EXTERNAL MODULE: ./lib/webrtmp.js
 var webrtmp = __webpack_require__("./lib/webrtmp.js");
+;// CONCATENATED MODULE: ../bunkerplayer2/src/utils/logger.js
+/*
+ * Copyright (C) 2016 itNOX. All Rights Reserved.
+ *
+ * @author Michael Balen <mb@itnox.de>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class logger_Log {
+    static OFF = -1;
+    static TRACE = 0;
+    static DEBUG = 1;
+    static INFO = 2;
+    static WARN = 3;
+    static ERROR = 4;
+    static CRITICAL = 5;
+    static WITH_STACKTRACE = true;
+
+    static LEVEL = logger_Log.DEBUG;
+
+    /**
+     * Object with [ClassName, Loglevel]
+     * @type {}
+     */
+    static loglevels = {};
+
+    /**
+     *
+     * @param {Number} level
+     * @param {String} tag
+     * @param txt
+     * @private
+     */
+    static _output = function output(level, tag, ...txt){
+        let tmpLevel = logger_Log.LEVEL;
+
+        if(logger_Log.loglevels[tag]) tmpLevel = logger_Log.loglevels[tag];
+
+        if(tmpLevel === logger_Log.OFF) return;
+        if(tmpLevel > level) return;
+
+        const callstack = logger_Log._getStackTrace();
+
+        // debug aufruf entfernen
+        callstack.shift();
+        callstack.shift();
+
+        let color = "color: silver";
+
+        switch(level) {
+            case logger_Log.TRACE:	// TRACE
+                color = "background-color: gray";
+                break;
+
+            case logger_Log.DEBUG:	// DEBUG
+                break;
+
+            case logger_Log.INFO:	// INFO
+                color = "color: green";
+                break;
+
+            case logger_Log.WARN:	// WARN
+                color = "color: orange; background-color: #EAA80035";
+                break;
+
+            case logger_Log.ERROR:	// ERROR
+                color = "color: red; background-color: #FF000020";
+                break;
+
+            case logger_Log.CRITICAL:	// CRITICAL
+                color = "color: red";
+                break;
+        }
+
+        logger_Log._print(callstack, color, tag, ...txt);
+    };
+
+    /**
+     * Internal for console dump
+     * @param {String[]} callstack
+     * @param {String} color
+     * @param {String} tag
+     * @param txt
+     * @private
+     */
+    static _print(callstack, color, tag, ...txt){
+        if(logger_Log.WITH_STACKTRACE){
+            if(logger_Log.LEVEL === logger_Log.ERROR){
+                console.group("%c[" + tag + "]", color, ...txt);
+            } else {
+                console.groupCollapsed("%c[" + tag + "]", color, ...txt);
+            }
+
+            for(let i = 0; i < callstack.length; i++) {
+                console.log("%c" + callstack[i], color);
+            }
+
+            console.groupEnd();
+
+        } else {
+            console.log("%c[" + tag + "]", color, ...txt)
+        }
+    }
+
+    /**
+     * Get Callstack
+     * @returns {String[]}
+     * @private
+     */
+    static _getStackTrace = function() {
+        let callstack = [];
+
+        try {
+            i.dont.exist+=0; //doesn't exist- that's the point
+
+        } catch(e) {
+            if (e.stack) { //Firefox
+                let lines = e.stack.split('\n');
+
+                for (let i=0; i < lines.length; i++) {
+                    callstack.push(lines[i]);
+                }
+
+                //Ersten Eintrag entfernen
+                callstack.shift();
+                callstack.shift();
+            }
+        }
+
+        return(callstack);
+    };
+
+    /**
+     * Log Critical
+     * @param {String} tag
+     * @param msg
+     */
+    static c(tag, ...msg) {
+        logger_Log._output(logger_Log.CRITICAL, tag, ...msg);
+    }
+
+    /**
+     * Log Error
+     * @param {String} tag
+     * @param msg
+     */
+    static e(tag, ...msg) {
+        logger_Log._output(logger_Log.ERROR, tag, ...msg);
+    }
+
+    /**
+     * Log Info
+     * @param {String} tag
+     * @param msg
+     */
+    static i(tag, ...msg) {
+        logger_Log._output(logger_Log.INFO, tag, ...msg);
+    }
+
+    /**
+     * Log Warning
+     * @param {String} tag
+     * @param msg
+     */
+    static w(tag, ...msg) {
+        logger_Log._output(logger_Log.WARN, tag, ...msg);
+    }
+
+    /**
+     * Log Debug
+     * @param {String} tag
+     * @param msg
+     */
+    static d(tag, ...msg) {
+        logger_Log._output(logger_Log.DEBUG, tag, ...msg);
+    }
+
+    /**
+     * Log Debug
+     * @param {String} tag
+     * @param msg
+     */
+    static v(tag, ...msg) {
+        logger_Log._output(logger_Log.DEBUG, tag, ...msg);
+    }
+
+    /**
+     * Log Trace
+     * @param {String} tag
+     * @param msg
+     */
+    static t(tag, ...msg) {
+        logger_Log._output(logger_Log.TRACE, tag, ...msg);
+    }
+}
+
+/* harmony default export */ const utils_logger = (logger_Log);
+
+;// CONCATENATED MODULE: ./src/utils/event_emitter.js
+/*
+ *
+ * Copyright (C) 2023 itNOX. All Rights Reserved.
+ *
+ * @author Michael Balen <mb@itnox.de>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+
+
+/**
+ * A small class for Handling events
+ */
+class EventEmitter{
+	ListenerList = [];
+	TAG = "EventEmitter";
+	waiters = [];
+
+	constructor() {
+	}
+
+	/**
+	 * Add an event listener
+	 * @param {String} event - The Name of the event
+	 * @param {Function} listener - the callback when occurs
+	 * @param {boolean} modal - Overwrite existing listener for this event
+	 */
+	addEventListener(event, listener, modal = false){
+		utils_logger.d(this.TAG, "addEventListener: " + event);
+
+		for(let i = 0; i < this.ListenerList.length;i++){
+			let entry = this.ListenerList[i];
+			if(entry[0] === event) {
+				if (modal || entry[1] === listener) {
+					utils_logger.w(this.TAG, "Listener already registered, overriding");
+					return;
+				}
+			}
+		}
+		this.ListenerList.push([event, listener]);
+	}
+
+	waitForEvent(event, callback){
+		this.waiters.push([event, callback]);
+	}
+
+	/**
+	 * A synonym for addEventListener
+	 * @param {String} event
+	 * @param {Function} listener
+	 * @param {boolean} modal
+	 */
+	addListener(event, listener, modal){
+		this.addEventListener(event, listener, modal);
+	}
+
+
+	/**
+	 * Remove an event listener
+	 * @param {String} event
+	 * @param {Function} listener
+	 */
+	removeEventListener(event, listener){
+		utils_logger.d(this.TAG, "removeEventListener: " + event);
+
+		for(let i = 0; i < this.ListenerList.length;i++){
+			let entry = this.ListenerList[i];
+			if(entry[0] === event && entry[1] === listener){
+				this.ListenerList.splice(i,1);
+				return;
+			}
+		}
+	}
+
+    /**
+     * A synonym for removeEventListener
+     * @param {String} event
+     * @param {Function} listener
+     */
+	removeListener(event, listener){
+		this.removeEventListener(event, listener);
+	}
+
+	/**
+	 * Remove all listener
+     * @param {String|undefined} event - If provided, remove all listener for this event
+	 */
+	removeAllEventListener(event){
+		utils_logger.d(this.TAG, "removeAllEventListener: ", event);
+		if(event) {
+			for(let i = 0; i < this.ListenerList.length;i++) {
+				let entry = this.ListenerList[i];
+				if(entry[0] === event){
+					this.ListenerList.splice(i,1);
+					i--;
+				}
+			}
+		} else
+			this.ListenerList = [];
+	}
+
+    /**
+     * A synonym for removeAllEventListener
+     * @param event
+     */
+	removeAllListener(event){
+		this.removeAllEventListener(event);
+	}
+
+	/**
+	 *
+	 * @param {String} event
+	 * @param data
+	 */
+	emit(event, ...data){
+		utils_logger.t(this.TAG, "emit EVENT: " + event, ...data);
+
+		for(let i = 0; i < this.waiters.length;i++){
+			let entry = this.waiters[i];
+
+			if(entry[0] === event){
+				utils_logger.d(this.TAG, "hit waiting event: " + event);
+				entry[1].call(this, ...data);
+				this.waiters.splice(i,1);
+				i--;
+			}
+		}
+
+		for(let i = 0; i < this.ListenerList.length;i++){
+			let entry = this.ListenerList[i];
+			if(entry[0] === event){
+				entry[1].call(this, ...data);
+			}
+		}
+	}
+}
+
+/* harmony default export */ const event_emitter = (EventEmitter);
+
+
 ;// CONCATENATED MODULE: ./src/avideo.js
+
 
 
 
@@ -23422,6 +23786,7 @@ class AVideo extends HTMLVideoElement{
 
         this.webrtmp = new webrtmp.WebRTMP();
         this.hls = new (hls_light_default())(this.hls_config);
+        this._emitter = new event_emitter();
     }
 
     stop(){
@@ -23461,8 +23826,7 @@ class AVideo extends HTMLVideoElement{
             if(!this.attached) this._attach("HLS");
 
             return new Promise((resolve)=>{
-                logger.d(this.TAG, "starting HLS");
-                resolve();
+                this.addEventListener("play", resolve);
             });
 
         } else {

@@ -68,8 +68,7 @@ export class AVideo extends HTMLVideoElement{
             if(!this.attached) this._attach("HLS");
 
             return new Promise((resolve)=>{
-                Log.d(this.TAG, "starting HLS");
-                resolve();
+                this.addEventListener("play", resolve);
             });
 
         } else {
@@ -116,6 +115,9 @@ export class AVideo extends HTMLVideoElement{
     connectedCallback(){
         Log.d(this.TAG, "connectedCallback");
         if(this.hasAttribute("src")) this.src = this.getAttribute("src");
+        if(this.hasAttribute("src")){
+            this.playURL(this.getAttribute("src"));
+        }
     }
 
     disconnectedCallback() {
