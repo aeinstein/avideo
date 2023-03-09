@@ -44,7 +44,7 @@ export class AVideo extends HTMLVideoElement{
     stop(){
         switch(this.attached){
         case "WebRTMP":
-            this.webrtmp.stop();
+            this.webrtmp.stopLoad();
             break;
 
         case "HLS":
