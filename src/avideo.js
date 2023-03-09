@@ -22,6 +22,16 @@ export class AVideo extends HTMLVideoElement{
         liveSyncDurationCount: 3		// 3 fragments before playing
     }
 
+    /**
+     * @type WebRTMP
+     */
+    webrtmp;
+
+    /**
+     * @type HLS
+     */
+    hls;
+
     constructor() {
         super();
 
@@ -34,15 +44,25 @@ export class AVideo extends HTMLVideoElement{
     stop(){
         switch(this.attached){
         case "WebRTMP":
+            this.webrtmp.stop();
             break;
 
         case "HLS":
+            this.hls.stopLoad();
             break;
         }
     }
 
     playURL(streamurl){
-        if(streamurl && streamurl !== this.streamurl) this.streamurl = streamurl;
+        if(streamurl && streamurl !== this.streamurl) {
+            this.streamurl = streamurl;
+            this.stop();
+        } else {
+            Log.d(this.TAG, "already playing this URL");
+            return new Promise((resolve, reject)=>{
+                reject();
+            });
+        }
 
         Log.d(this.TAG, "play: " + this.streamurl);
 
@@ -53,10 +73,12 @@ export class AVideo extends HTMLVideoElement{
             if(this.attached && this.attached !== "WebRTMP") this._detach();
             if(!this.attached) this._attach("WebRTMP");
 
-            this.webrtmp.open(parts["server"], parts["port"]).then(()=>{
-                this.webrtmp.connect(parts["app"]).then(()=>{
-                    return this.webrtmp.play(parts["stream"]);
-                });
+            return new Promise((resolve, reject)=>{
+                this.webrtmp.open(parts["server"], parts["port"]).then(()=>{
+                    this.webrtmp.connect(parts["app"]).then(()=>{
+                        this.webrtmp.play(parts["stream"]).then(resolve);
+                    }).catch(reject);
+                }).catch(reject);
             });
 
         } else if(getFileExtension(this.streamurl) === "m3u8"){

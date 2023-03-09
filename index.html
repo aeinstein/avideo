@@ -19,12 +19,15 @@
 <button onclick="play('https://bunkertv.org/css/logo_neu.mp4')">Play Mp4</button><br>
 <button onclick="play('https://bunkertv.org/demo/livetest.m3u8')">Play HLS</button><br>
 <button onclick="play('rtmp://bunkertv.org:9001/demo/livetest')">Play RTMP</button><br>
+<button onclick="stop()">Stop</button><br>
 
 <script>
     const output = document.getElementById("output");
 
     function play(url){
-        output.playURL(url);
+        output.playURL(url).then(()=>{
+            console.log("playing");
+        });
     }
 </script>
 </body>
