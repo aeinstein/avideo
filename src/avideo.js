@@ -53,6 +53,18 @@ export class AVideo extends HTMLVideoElement{
         }
     }
 
+    pause(enable){
+        switch(this.attached){
+        case "WebRTMP":
+            this.webrtmp.pause(enable);
+            break;
+
+        case "HLS":
+            //this.hls.stopLoad();
+            break;
+        }
+    }
+
     playURL(streamurl){
         if(streamurl && streamurl !== this.streamurl) {
             this.streamurl = streamurl;
