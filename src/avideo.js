@@ -1,5 +1,6 @@
 import Log from "./utils/logger";
 import Hls from "../lib/hls.light";
+import { dashjs } from "../lib/dash.all.min";
 import {_parseRTMPURL, getFileExtension} from "./utils/utils";
 import { WebRTMP } from "../lib/webrtmp";
 
@@ -93,16 +94,28 @@ export class AVideo extends HTMLVideoElement{
                 }).catch(reject);
             });
 
-        } else if(getFileExtension(this.streamurl) === "m3u8"){
+        } else if(getFileExtension(this.streamurl) === "m3u8") {
             Log.d(this.TAG, "super.play2");
-            if(this.attached && this.attached !== "HLS") this._detach();
+            if (this.attached && this.attached !== "HLS") this._detach();
 
             this.hls.loadSource(this.streamurl);
 
-            if(!this.attached) this._attach("HLS");
+            if (!this.attached) this._attach("HLS");
 
-            return new Promise((resolve)=>{
+            return new Promise((resolve) => {
                 this.addEventListener("play", resolve);
+            });
+
+        } else if(getFileExtension(this.streamurl) === "mpd"){
+            Log.d(this.TAG, "play MPD");
+            if (this.attached && this.attached !== "DASH") this._detach();
+            if (!this.attached) this._attach("DASH");
+
+            this.dash.attachSource(this.streamurl);
+
+            return new Promise((resolve) => {
+                this.addEventListener("play", resolve);
+                this.dash.play();
             });
 
         } else {
@@ -126,6 +139,10 @@ export class AVideo extends HTMLVideoElement{
                 this.webrtmp.stopLoad();
                 this.webrtmp.detachMediaElement();
                 break;
+
+            case "DASH":
+                this.dash.destroy();
+                break;
         }
 
         this.attached = false;
@@ -142,6 +159,11 @@ export class AVideo extends HTMLVideoElement{
 
         case "WebRTMP":
             this.webrtmp.attachMediaElement(this);
+            break;
+
+        case "DASH":
+            this.dash = dashjs.MediaPlayer().create();
+            this.dash.attachView(this);
             break;
         }
     }
