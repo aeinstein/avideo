@@ -1,6 +1,6 @@
 import Log from "./utils/logger";
 import Hls from "../lib/hls.light";
-import { dashjs } from "../lib/dash.all.min";
+import  dashjs  from "../lib/dash.all.min";
 import {_parseRTMPURL, getFileExtension} from "./utils/utils";
 import { WebRTMP } from "../lib/webrtmp";
 
@@ -32,6 +32,8 @@ export class AVideo extends HTMLVideoElement{
      * @type HLS
      */
     hls;
+
+    dash;
 
     constructor() {
         super();
@@ -101,10 +103,12 @@ export class AVideo extends HTMLVideoElement{
             this.hls.loadSource(this.streamurl);
 
             if (!this.attached) this._attach("HLS");
+            return super.play();
 
+            /*
             return new Promise((resolve) => {
                 this.addEventListener("play", resolve);
-            });
+            });*/
 
         } else if(getFileExtension(this.streamurl) === "mpd"){
             Log.d(this.TAG, "play MPD");
@@ -163,7 +167,7 @@ export class AVideo extends HTMLVideoElement{
 
         case "DASH":
             this.dash = dashjs.MediaPlayer().create();
-            this.dash.attachView(this);
+            this.dash.initialize(this);
             break;
         }
     }
