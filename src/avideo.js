@@ -1,6 +1,6 @@
 import Log from "./utils/logger";
 import Hls from "../lib/hls.light";
-import  dashjs  from "../lib/dash.all.min";
+import  dashjs  from "../lib/dash.mediaplayer.min";
 import {_parseRTMPURL, getFileExtension} from "./utils/utils";
 import { WebRTMP } from "../lib/webrtmp";
 
@@ -53,6 +53,10 @@ export class AVideo extends HTMLVideoElement{
         case "HLS":
             this.hls.stopLoad();
             break;
+
+        case "DASH":
+            this.dash.pause();
+            break;
         }
     }
 
@@ -62,8 +66,8 @@ export class AVideo extends HTMLVideoElement{
             this.webrtmp.pause(enable);
             break;
 
-        case "HLS":
-            //this.hls.stopLoad();
+        case "DASH":
+            this.dash.pause();
             break;
         }
     }
