@@ -32,6 +32,7 @@ export class AVideo extends HTMLVideoElement{
      * @type HLS
      */
     hls;
+    hls_paused = false;
 
     dash;
 
@@ -42,6 +43,16 @@ export class AVideo extends HTMLVideoElement{
 
         this.webrtmp = new WebRTMP();
         this.hls = new Hls(this.hls_config);
+
+        this.addEventListener("pause", ()=>{
+            Log.d(this.TAG, "pause");
+            this._ensureCorrectPauseState();
+        })
+
+        this.addEventListener("play", ()=>{
+            Log.d(this.TAG, "play");
+            this._ensureCorrectPauseState();
+        })
     }
 
     stop(){
@@ -67,20 +78,44 @@ export class AVideo extends HTMLVideoElement{
             break;
 
         case "DASH":
-            this.dash.pause();
+            if(enable) this.dash.pause();
+            else this.dash.play();
+            break;
+
+        default:
+            if(enable) super.pause();
+            else super.play();
+        }
+    }
+
+    _ensureCorrectPauseState(){
+        switch(this.attached){
+        case "HLS":
+            if(this.paused){
+                this.hls_paused = true;
+                this.hls.stopLoad();
+
+            } else {
+                if(this.hls_paused) this.hls.startLoad();
+                this.hls_paused = false;
+            }
             break;
         }
     }
 
-    playURL(streamurl){
+    playURL(streamurl, force){
         if(streamurl && streamurl !== this.streamurl) {
             this.streamurl = streamurl;
             this.stop();
+
         } else {
-            Log.d(this.TAG, "already playing this URL");
-            return new Promise((resolve, reject)=>{
-                reject();
-            });
+            if(!force) {
+                Log.d(this.TAG, "already playing this URL");
+                super.pause();
+                return new Promise((resolve, reject)=>{
+                    resolve();
+                });
+            }
         }
 
         Log.d(this.TAG, "play: " + this.streamurl);
