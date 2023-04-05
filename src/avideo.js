@@ -69,6 +69,8 @@ export class AVideo extends HTMLVideoElement{
             this.dash.pause();
             break;
         }
+
+        this._detach();
     }
 
     pause(enable){
